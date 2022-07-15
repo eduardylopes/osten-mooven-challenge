@@ -1,0 +1,29 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Empresa {
+  id            String     @id @default(uuid())
+  razao_social  String     @unique
+  nome_fantasia String
+  cnpj          String
+  endereco      Endereco[]
+
+}
+
+model Endereco {
+  id          String   @id @default(uuid())
+  logradouro  String
+  numero      Int
+  complemento String
+  bairro      String
+  cidade      String
+  estado      String
+  Empresa     Empresa? @relation(fields: [empresaId], references: [id])
+  empresaId   String?
+}
