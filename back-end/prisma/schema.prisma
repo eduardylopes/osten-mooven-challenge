@@ -12,8 +12,8 @@ model Empresa {
   razao_social  String     @unique
   nome_fantasia String
   cnpj          String
+  created_at    DateTime   @default(now())
   endereco      Endereco[]
-
 }
 
 model Endereco {
@@ -24,6 +24,8 @@ model Endereco {
   bairro      String
   cidade      String
   estado      String
+  telefone    String
+  created_at  DateTime @default(now())
   Empresa     Empresa? @relation(fields: [empresaId], references: [id])
   empresaId   String?
 }
