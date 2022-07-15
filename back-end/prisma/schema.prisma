@@ -9,9 +9,9 @@ datasource db {
 
 model Company {
   id             String    @id @default(uuid())
-  corporate_name String    @unique
+  corporate_name String
   name           String
-  cnpj           String
+  cnpj           String    @unique
   created_at     DateTime  @default(now())
   address        Address[]
 }
