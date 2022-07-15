@@ -7,25 +7,25 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Empresa {
-  id            String     @id @default(uuid())
-  razao_social  String     @unique
-  nome_fantasia String
-  cnpj          String
-  created_at    DateTime   @default(now())
-  endereco      Endereco[]
+model Company {
+  id             String    @id @default(uuid())
+  corporate_name String    @unique
+  name           String
+  cnpj           String
+  created_at     DateTime  @default(now())
+  address        Address[]
 }
 
-model Endereco {
-  id          String   @id @default(uuid())
-  logradouro  String
-  numero      Int
-  complemento String
-  bairro      String
-  cidade      String
-  estado      String
-  telefone    String
-  created_at  DateTime @default(now())
-  Empresa     Empresa? @relation(fields: [empresaId], references: [id])
-  empresaId   String?
+model Address {
+  id         String   @id @default(uuid())
+  street     String
+  number     Int
+  complement String
+  district   String
+  city       String
+  state      String
+  telephone  String
+  created_at DateTime @default(now())
+  Company    Company? @relation(fields: [companyId], references: [id])
+  companyId  String?
 }
