@@ -7,22 +7,40 @@ import { CreateCompanyDto } from './dtos/create-company.dto';
 export class CompanyService {
   constructor(private prisma: PrismaService) {}
 
-  async create(company: CreateCompanyDto): Promise<Company> {
+  async create({
+    corporate_name,
+    name,
+    cnpj,
+    address,
+  }: CreateCompanyDto): Promise<Company> {
     const companyAlreadyExists = await this.prisma.company.findUnique({
-      where: { cnpj: company.id },
+      where: { cnpj },
     });
 
     if (companyAlreadyExists) {
       throw new HttpException('Company already exists', HttpStatus.BAD_REQUEST);
     }
 
-    const newCompany = await this.prisma.company.create({ data: company });
+    const newCompany = await this.prisma.company.create({
+      data: {
+        corporate_name,
+        name,
+        cnpj,
+        address: {
+          create: address,
+        },
+      },
+      include: { address: true },
+    });
 
     return newCompany;
   }
 
   async findOne(id: string): Promise<Company> {
-    const company = await this.prisma.company.findUnique({ where: { id } });
+    const company = await this.prisma.company.findUnique({
+      where: { id },
+      include: { address: true },
+    });
 
     if (!company) {
       throw new HttpException('Company not found', HttpStatus.NOT_FOUND);
@@ -38,6 +56,7 @@ export class CompanyService {
           contains: value,
         },
       },
+      include: { address: true },
     });
 
     if (!companies) {
@@ -48,7 +67,9 @@ export class CompanyService {
   }
 
   async findAll(): Promise<Company[]> {
-    const companies = await this.prisma.company.findMany();
+    const companies = await this.prisma.company.findMany({
+      include: { address: true },
+    });
 
     if (!companies) {
       throw new HttpException(
@@ -61,6 +82,9 @@ export class CompanyService {
   }
 
   async remove(id: string) {
-    await this.prisma.company.delete({ where: { id } });
+    await this.prisma.company.delete({
+      where: { id },
+      include: { address: true },
+    });
   }
 }

@@ -9,7 +9,6 @@ interface CompanyAddress {
 }
 
 interface CreateCompanyDto {
-  id: string;
   corporate_name: string;
   name: string;
   cnpj: string;
