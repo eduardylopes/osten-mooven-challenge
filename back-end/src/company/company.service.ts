@@ -82,6 +82,14 @@ export class CompanyService {
   }
 
   async remove(id: string) {
+    const company = await this.prisma.company.findUnique({
+      where: { id },
+    });
+
+    if (!company) {
+      throw new HttpException('Company not found', HttpStatus.BAD_REQUEST);
+    }
+
     await this.prisma.company.delete({
       where: { id },
       include: { address: true },
