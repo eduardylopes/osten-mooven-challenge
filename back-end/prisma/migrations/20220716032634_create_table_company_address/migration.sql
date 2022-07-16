@@ -18,9 +18,12 @@ CREATE TABLE "Address" (
     "state" TEXT NOT NULL,
     "telephone" TEXT NOT NULL,
     "created_at" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "companyId" TEXT,
-    CONSTRAINT "Address_companyId_fkey" FOREIGN KEY ("companyId") REFERENCES "Company" ("id") ON DELETE SET NULL ON UPDATE CASCADE
+    "companyId" TEXT NOT NULL,
+    CONSTRAINT "Address_companyId_fkey" FOREIGN KEY ("companyId") REFERENCES "Company" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Company_corporate_name_key" ON "Company"("corporate_name");
+CREATE UNIQUE INDEX "Company_cnpj_key" ON "Company"("cnpj");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Address_companyId_key" ON "Address"("companyId");

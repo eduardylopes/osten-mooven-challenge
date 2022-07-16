@@ -13,12 +13,11 @@ model Company {
   name           String
   cnpj           String   @unique
   created_at     DateTime @default(now())
-  addressId      String
-  adress         Address  @relation(fields: [addressId], references: [id])
+  address        Address?
 }
 
 model Address {
-  id         String    @id @default(uuid())
+  id         String   @id @default(uuid())
   street     String
   number     Int
   complement String
@@ -26,7 +25,7 @@ model Address {
   city       String
   state      String
   telephone  String
-  created_at DateTime  @default(now())
-  companyId  String
-  Company    Company[]
+  created_at DateTime @default(now())
+  companyId  String   @unique
+  Company    Company  @relation(fields: [companyId], references: [id])
 }
