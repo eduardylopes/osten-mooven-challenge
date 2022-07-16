@@ -1,19 +1,20 @@
 import { Type } from 'class-transformer';
 import {
-  IsArray,
   IsNumber,
+  IsOptional,
   IsString,
   Matches,
   ValidateNested,
 } from 'class-validator';
 
-export class CompanyAddress {
+class CompanyAddress {
   @IsString()
   street: string;
 
   @IsNumber()
   number: number;
 
+  @IsOptional()
   @IsString()
   complement: string;
 
@@ -43,7 +44,6 @@ export class CreateCompanyDto {
   @IsString()
   cnpj: string;
 
-  @IsArray()
   @ValidateNested({ each: true })
   @Type(() => CompanyAddress)
   address: CompanyAddress;

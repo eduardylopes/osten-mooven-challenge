@@ -2,6 +2,7 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { Company } from '@prisma/client';
 import { CreateCompanyDto } from './dtos/create-company.dto';
+import { UpdateCompanyDto } from './dtos/update-company.dto';
 
 @Injectable()
 export class CompanyService {
@@ -94,5 +95,35 @@ export class CompanyService {
       where: { id },
       include: { address: true },
     });
+  }
+
+  async update(
+    { name, corporate_name, cnpj, address }: UpdateCompanyDto,
+    id: string,
+  ) {
+    const company = await this.prisma.company.findUnique({
+      where: { id },
+      include: { address: true },
+    });
+
+    if (!company) {
+      throw new HttpException('Company not found', HttpStatus.BAD_REQUEST);
+    }
+
+    await this.prisma.company.update({
+      where: { id },
+      data: {
+        name,
+        corporate_name,
+        cnpj,
+      },
+    });
+
+    if (address) {
+      await this.prisma.address.update({
+        where: { id: company.address['id'] },
+        data: address,
+      });
+    }
   }
 }
