@@ -44,7 +44,7 @@ export class CompanyService {
     return newCompany;
   }
 
-  async findOne(id: string): Promise<Company> {
+  async findOne(id: number): Promise<Company> {
     const company = await this.prisma.company.findUnique({
       where: { id },
       include: { address: true },
@@ -89,7 +89,7 @@ export class CompanyService {
     return companies;
   }
 
-  async remove(id: string) {
+  async remove(id: number) {
     const company = await this.prisma.company.findUnique({
       where: { id },
     });
@@ -106,7 +106,7 @@ export class CompanyService {
 
   async update(
     { name, corporate_name, cnpj, address }: UpdateCompanyDto,
-    id: string,
+    id: number,
   ) {
     if (cnpj) {
       const isCnpjValid = cnpjValidation(cnpj);

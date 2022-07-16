@@ -35,7 +35,7 @@ export class CompanyController {
   }
 
   @Get(':id')
-  async getOne(@Param('id') id: string): Promise<Company> {
+  async getOne(@Param('id') id: number): Promise<Company> {
     const company = await this.companyService.findOne(id);
     return company;
   }
@@ -49,7 +49,7 @@ export class CompanyController {
 
   @HttpCode(HttpStatus.NO_CONTENT)
   @Delete(':id')
-  async delete(@Param('id') id: string): Promise<void> {
+  async delete(@Param('id') id: number): Promise<void> {
     await this.companyService.remove(id);
   }
 
@@ -57,7 +57,7 @@ export class CompanyController {
   @Patch(':id')
   async update(
     @Param('id')
-    id: string,
+    id: number,
 
     @Body() company: UpdateCompanyDto,
   ): Promise<void> {
