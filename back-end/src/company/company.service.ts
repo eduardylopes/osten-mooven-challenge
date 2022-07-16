@@ -26,7 +26,7 @@ export class CompanyService {
     });
 
     if (companyAlreadyExists) {
-      throw new HttpException('Company already exists', HttpStatus.BAD_REQUEST);
+      throw new HttpException('company already exists', HttpStatus.BAD_REQUEST);
     }
 
     const newCompany = await this.prisma.company.create({
@@ -51,7 +51,7 @@ export class CompanyService {
     });
 
     if (!company) {
-      throw new HttpException('Company not found', HttpStatus.NOT_FOUND);
+      throw new HttpException('company not found', HttpStatus.NOT_FOUND);
     }
 
     return company;
@@ -68,7 +68,7 @@ export class CompanyService {
     });
 
     if (!companies) {
-      throw new HttpException('Company not found', HttpStatus.NOT_FOUND);
+      throw new HttpException('company not found', HttpStatus.NOT_FOUND);
     }
 
     return companies;
@@ -81,7 +81,7 @@ export class CompanyService {
 
     if (!companies) {
       throw new HttpException(
-        'There are no registered companies',
+        'there are no registered companies',
         HttpStatus.NO_CONTENT,
       );
     }
@@ -95,7 +95,7 @@ export class CompanyService {
     });
 
     if (!company) {
-      throw new HttpException('Company not found', HttpStatus.BAD_REQUEST);
+      throw new HttpException('company not found', HttpStatus.BAD_REQUEST);
     }
 
     await this.prisma.company.delete({
@@ -108,13 +108,21 @@ export class CompanyService {
     { name, corporate_name, cnpj, address }: UpdateCompanyDto,
     id: string,
   ) {
+    if (cnpj) {
+      const isCnpjValid = cnpjValidation(cnpj);
+
+      if (!isCnpjValid) {
+        throw new HttpException('cnpj must be valid', HttpStatus.BAD_GATEWAY);
+      }
+    }
+
     const company = await this.prisma.company.findUnique({
       where: { id },
       include: { address: true },
     });
 
     if (!company) {
-      throw new HttpException('Company not found', HttpStatus.BAD_REQUEST);
+      throw new HttpException('company not found', HttpStatus.BAD_REQUEST);
     }
 
     await this.prisma.company.update({
@@ -123,14 +131,8 @@ export class CompanyService {
         name,
         corporate_name,
         cnpj,
+        address: { update: address },
       },
     });
-
-    if (address) {
-      await this.prisma.address.update({
-        where: { id: company.address['id'] },
-        data: address,
-      });
-    }
   }
 }
