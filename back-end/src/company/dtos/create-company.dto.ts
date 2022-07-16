@@ -46,5 +46,5 @@ export class CreateCompanyDto {
   @IsArray()
   @ValidateNested({ each: true })
   @Type(() => CompanyAddress)
-  address: CompanyAddress[];
+  address: CompanyAddress;
 }
