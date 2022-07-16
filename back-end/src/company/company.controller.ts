@@ -16,7 +16,7 @@ import { CreateCompanyDto } from './dtos/create-company.dto';
 import { UpdateCompanyDto } from './dtos/update-company.dto';
 import { ApiBody } from '@nestjs/swagger';
 
-@Controller('company')
+@Controller('api/company')
 export class CompanyController {
   constructor(private readonly companyService: CompanyService) {}
 
@@ -26,7 +26,7 @@ export class CompanyController {
     return companies;
   }
 
-  @Get('list/one')
+  @Get('list/filter-companies')
   async getMany(
     @Query('corporate_name') corporate_name: string,
   ): Promise<Company[]> {
