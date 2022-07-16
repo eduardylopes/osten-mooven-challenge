@@ -14,8 +14,8 @@ async function bootstrap() {
   );
 
   const config = new DocumentBuilder()
-    .setTitle('Osten Moove')
-    .setDescription('The Company API Documentation')
+    .setTitle('API Docs')
+    .setDescription('The company registration API documentation')
     .setVersion('1.0')
     .addTag('Company')
     .build();

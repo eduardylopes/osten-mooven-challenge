@@ -3,6 +3,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { Company } from '@prisma/client';
 import { CreateCompanyDto } from './dtos/create-company.dto';
 import { UpdateCompanyDto } from './dtos/update-company.dto';
+import { cnpjValidation } from 'src/utils/cnpj-validation';
 
 @Injectable()
 export class CompanyService {
@@ -14,6 +15,12 @@ export class CompanyService {
     cnpj,
     address,
   }: CreateCompanyDto): Promise<Company> {
+    const isCnpjValid = cnpjValidation(cnpj);
+
+    if (!isCnpjValid) {
+      throw new HttpException('cnpj must be valid', HttpStatus.BAD_GATEWAY);
+    }
+
     const companyAlreadyExists = await this.prisma.company.findUnique({
       where: { cnpj },
     });

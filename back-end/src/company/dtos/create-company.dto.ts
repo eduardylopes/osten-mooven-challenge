@@ -49,8 +49,8 @@ export class CreateCompanyDto {
   name: string;
 
   @ApiProperty()
-  @Matches(/^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$/, {
-    message: 'cnpj must be valid',
+  @Matches(/^\d{2}\.?\d{3}\.?\d{3}\/?\d{4}\-?\d{2}$/, {
+    message: 'cnpj must contain 14 digits',
   })
   @IsString()
   cnpj: string;
