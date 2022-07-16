@@ -14,6 +14,7 @@ import { CompanyService } from './company.service';
 import { Company } from '@prisma/client';
 import { CreateCompanyDto } from './dtos/create-company.dto';
 import { UpdateCompanyDto } from './dtos/update-company.dto';
+import { ApiBody } from '@nestjs/swagger';
 
 @Controller('company')
 export class CompanyController {
@@ -39,6 +40,7 @@ export class CompanyController {
     return company;
   }
 
+  @ApiBody({ type: [CreateCompanyDto] })
   @Post()
   async post(@Body() company: CreateCompanyDto): Promise<Company> {
     const newCompany = await this.companyService.create(company);
@@ -51,6 +53,7 @@ export class CompanyController {
     await this.companyService.remove(id);
   }
 
+  @ApiBody({ type: [UpdateCompanyDto] })
   @Patch(':id')
   async update(
     @Param('id')
