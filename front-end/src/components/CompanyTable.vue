@@ -172,7 +172,7 @@ export default defineComponent({
     addCompany() {},
 
     async onDeleteCompany(companyId) {
-      const { response } = await deleteCompany(companyId);
+      const response = await deleteCompany(companyId);
       if (response.status === 204) {
         this.$q.notify({
           message: "Empresa deletada com sucesso!.",
