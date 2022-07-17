@@ -1,24 +1,15 @@
 <template>
-  <q-layout class="bg-dark" view="lHh Lpr lFf">
-    <CompanyTable />
+  <q-layout view="lHh Lpr lFf">
+    <q-page-container>
+      <router-view />
+    </q-page-container>
   </q-layout>
 </template>
 
 <script>
-import { defineComponent, ref } from "vue";
-import CompanyTable from "src/components/CompanyTable.vue";
+import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "MainLayout",
-
-  components: {
-    CompanyTable,
-  },
-
-  setup() {
-    const leftDrawerOpen = ref(false);
-
-    return {};
-  },
 });
 </script>
