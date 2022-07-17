@@ -1,5 +1,6 @@
 <template>
   <q-table
+    class="container"
     title="Treats"
     :rows="companies"
     :columns="columns"
@@ -7,7 +8,6 @@
     table-header-class="text-secondary font-weight-bold"
     dark
     square
-    class="container"
   >
     <template v-slot:body="props">
       <q-tr :props="props">
@@ -45,9 +45,8 @@
     </template>
 
     <template v-slot:top>
-      <div class="row full-width justify-between q-mb-md">
+      <div class="row full-width justify-between q-mb-md flex flex-row">
         <q-input
-          style="width: 30%"
           class="q-mr-md teal-10"
           debounce="600"
           color="teal-10"
@@ -71,12 +70,22 @@
       </div>
     </template>
   </q-table>
+  <CompanyDialog
+    v-model="activeCompanyDialog"
+    @closeInput="closeInput"
+    :companyId="companyId"
+    :isEdit="isEdit"
+  />
 </template>
 
 <style scoped>
 .container {
   width: 100vw;
-  height: 100vh;
+  height: 100vw;
+}
+.q-input {
+  flex: 1;
+  max-width: 500px;
 }
 </style>
 
@@ -87,6 +96,7 @@ import {
   deleteCompany,
   getFilterCompanies,
 } from "./CompanyService";
+import CompanyDialog from "./CompanyDialog.vue";
 
 const columns = [
   {
@@ -122,7 +132,9 @@ const columns = [
 ];
 
 export default defineComponent({
-  name: "CompanyTable",
+  name: "CompanyItem",
+
+  components: { CompanyDialog },
 
   setup() {
     const leftDrawerOpen = ref(false);
@@ -160,8 +172,8 @@ export default defineComponent({
     addCompany() {},
 
     async onDeleteCompany(companyId) {
-      const response = await deleteCompany(companyId);
-      if (response) {
+      const { response } = await deleteCompany(companyId);
+      if (response.status === 204) {
         this.$q.notify({
           message: "Empresa deletada com sucesso!.",
           color: "positive",
@@ -213,9 +225,10 @@ export default defineComponent({
     },
 
     async filterCompany(ev) {
-      const response = await getFilterCompanies(ev.target.value);
-      if (response) {
-        this.companies = response.data;
+      const { data } = await getFilterCompanies(ev.target.value);
+
+      if (data) {
+        this.companies = data;
       }
     },
   },

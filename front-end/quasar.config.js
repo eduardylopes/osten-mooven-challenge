@@ -31,7 +31,20 @@ module.exports = configure(function () {
     framework: {
       config: {},
 
-      plugins: [],
+      plugins: [
+        "Screen",
+        "Loading",
+        "Notify",
+        "AddressbarColor",
+        "LoadingBar",
+        "AppFullscreen",
+        "Meta",
+        "Cookies",
+        "Dialog",
+        "BottomSheet",
+        "LocalStorage",
+        "SessionStorage",
+      ],
     },
 
     animations: [],
