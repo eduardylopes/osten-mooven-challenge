@@ -6,6 +6,7 @@ import {
   HttpCode,
   HttpStatus,
   Param,
+  ParseIntPipe,
   Patch,
   Post,
   Query,
@@ -20,13 +21,13 @@ import { ApiBody } from '@nestjs/swagger';
 export class CompanyController {
   constructor(private readonly companyService: CompanyService) {}
 
-  @Get('list')
+  @Get()
   async getAll(): Promise<Company[]> {
     const companies = await this.companyService.findAll();
     return companies;
   }
 
-  @Get('list/filter-companies')
+  @Get('filter')
   async getMany(
     @Query('corporate_name') corporate_name: string,
   ): Promise<Company[]> {
@@ -35,8 +36,8 @@ export class CompanyController {
   }
 
   @Get(':id')
-  async getOne(@Param('id') id: number): Promise<Company> {
-    const company = await this.companyService.findOne(id);
+  async getOne(@Param('id', ParseIntPipe) id: number): Promise<Company> {
+    const company = await this.companyService.findOne(Number(id));
     return company;
   }
 
@@ -49,18 +50,16 @@ export class CompanyController {
 
   @HttpCode(HttpStatus.NO_CONTENT)
   @Delete(':id')
-  async delete(@Param('id') id: number): Promise<void> {
-    await this.companyService.remove(id);
+  async delete(@Param('id', ParseIntPipe) id: number): Promise<void> {
+    await this.companyService.remove(Number(id));
   }
 
   @ApiBody({ type: [UpdateCompanyDto] })
   @Patch(':id')
   async update(
-    @Param('id')
-    id: number,
-
+    @Param('id', ParseIntPipe) id: number,
     @Body() company: UpdateCompanyDto,
   ): Promise<void> {
-    await this.companyService.update(company, id);
+    await this.companyService.update(company, Number(id));
   }
 }
