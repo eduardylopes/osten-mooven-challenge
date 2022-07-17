@@ -1,22 +1,25 @@
 <template>
   <q-page class="flex flex-center" dark>
     <CompanyTableVue />
+    <CreateCompanyDialog
+      v-model="activeCompanyDialog"
+      @closeInput="closeInput"
+      :companyId="companyId"
+      :isEdit="isEdit"
+    />
   </q-page>
 </template>
 
-<style scoped>
-/* .q-page {
-  background-color: rgb(29, 29, 29);
-} */
-</style>
+<style scoped></style>
 
 <script>
-import CompanyTableVue from "src/components/CompanyTable.vue";
+import CreateCompanyDialog from "components/CreateCompanyDialog.vue";
+import CompanyTableVue from "components/CompanyTable.vue";
 import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "IndexPage",
 
-  components: { CompanyTableVue },
+  components: { CompanyTableVue, CreateCompanyDialog },
 });
 </script>

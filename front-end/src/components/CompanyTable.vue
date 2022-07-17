@@ -1,93 +1,82 @@
 <template>
-  <div class="container">
-    <div class="q-pa-md">
-      <q-table
-        title="Treats"
-        :rows="companies"
-        :columns="columns"
-        row-key="name"
-        table-header-class="text-secondary font-weight-bold"
-        dark
-      >
-        <template v-slot:body="props">
-          <q-tr :props="props">
-            <q-td key="id" :props="props">
-              {{ props.row.id }}
-            </q-td>
+  <q-table
+    title="Treats"
+    :rows="companies"
+    :columns="columns"
+    row-key="name"
+    table-header-class="text-secondary font-weight-bold"
+    dark
+    square
+    class="container"
+  >
+    <template v-slot:body="props">
+      <q-tr :props="props">
+        <q-td key="id" :props="props">
+          {{ props.row.id }}
+        </q-td>
 
-            <q-td key="corporate_name" :props="props">
-              {{ props.row.corporate_name }}
-            </q-td>
+        <q-td key="corporate_name" :props="props">
+          {{ props.row.corporate_name }}
+        </q-td>
 
-            <q-td key="cnpj" :props="props">
-              {{ props.row.cnpj }}
-            </q-td>
+        <q-td key="cnpj" :props="props">
+          {{ props.row.cnpj }}
+        </q-td>
 
-            <q-td key="action" :props="props">
-              <q-btn
-                @click="onEditCompany(props.row.id)"
-                class="q-mr-sm bg-secondary"
-                name="action"
-                icon="edit"
-              >
-                <q-tooltip>Editar</q-tooltip>
-              </q-btn>
-              <q-btn
-                @click="confirmDeleteCompany(props.row.id)"
-                class="bg-red"
-                name="action"
-                icon="delete"
-              >
-                <q-tooltip>Editar</q-tooltip>
-              </q-btn>
-            </q-td>
-          </q-tr>
-        </template>
+        <q-td key="action" :props="props">
+          <q-btn
+            @click="onEditCompany(props.row.id)"
+            class="q-mr-sm bg-secondary"
+            name="action"
+            icon="edit"
+          >
+            <q-tooltip>Editar</q-tooltip>
+          </q-btn>
+          <q-btn
+            @click="confirmDeleteCompany(props.row.id)"
+            class="bg-red"
+            name="action"
+            icon="delete"
+          >
+            <q-tooltip>Editar</q-tooltip>
+          </q-btn>
+        </q-td>
+      </q-tr>
+    </template>
 
-        <template v-slot:top>
-          <div class="row full-width justify-between q-mb-md">
-            <q-input
-              style="width: 30%"
-              class="q-mr-md teal-10"
-              debounce="600"
-              color="teal-10"
-              dark
-              filled
-              square
-              label-color="primary"
-              v-model="filter"
-              v-on:keyup.enter="(ev) => filterCompany(ev)"
-            >
-              <template v-slot:append>
-                <q-icon name="search" color="secondary" />
-              </template>
-            </q-input>
+    <template v-slot:top>
+      <div class="row full-width justify-between q-mb-md">
+        <q-input
+          style="width: 30%"
+          class="q-mr-md teal-10"
+          debounce="600"
+          color="teal-10"
+          dark
+          filled
+          square
+          label-color="primary"
+          v-model="filter"
+          v-on:keyup.enter="(ev) => filterCompany(ev)"
+        >
+          <template v-slot:append>
+            <q-icon name="search" color="secondary" />
+          </template>
+        </q-input>
 
-            <q-btn
-              color="secondary"
-              label="Cadastrar empresa"
-              @click="onShowDialog()"
-            />
-          </div>
-        </template>
-      </q-table>
-    </div>
-    <CompanyDialog
-      v-model="activeCompanyDialog"
-      @closeInput="closeInput"
-      :companyId="companyId"
-      :isEdit="isEdit"
-    />
-  </div>
+        <q-btn
+          color="secondary"
+          label="Cadastrar empresa"
+          @click="onShowDialog()"
+        />
+      </div>
+    </template>
+  </q-table>
 </template>
 
 <style scoped>
 .container {
   width: 100vw;
   height: 100vh;
-}
-
-.q-table {
 }
 </style>
 
@@ -98,7 +87,6 @@ import {
   deleteCompany,
   getFilterCompanies,
 } from "./CompanyService";
-import CompanyDialog from "./CompanyDialog.vue";
 
 const columns = [
   {
@@ -134,9 +122,7 @@ const columns = [
 ];
 
 export default defineComponent({
-  name: "CompanyItem",
-
-  components: { CompanyDialog },
+  name: "CompanyTable",
 
   setup() {
     const leftDrawerOpen = ref(false);

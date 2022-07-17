@@ -152,10 +152,8 @@
 <script>
 import { defineComponent, ref } from "vue";
 import { createCompany, getCompany, putCompany } from "./CompanyService";
-export default {
-  name: "CompanyDialog",
-
-  components: {},
+export default defineComponent({
+  name: "CreateCompanyDialog",
 
   setup() {
     opts: {
@@ -317,5 +315,5 @@ export default {
       }
     },
   },
-};
+});
 </script>
