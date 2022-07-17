@@ -1,6 +1,6 @@
 <template>
-  <div class="company">
-    <div class="container q-pa-md">
+  <div class="container">
+    <div class="q-pa-md">
       <q-table
         title="Treats"
         :rows="companies"
@@ -47,10 +47,14 @@
         <template v-slot:top>
           <div class="row full-width justify-between q-mb-md">
             <q-input
-              style="width: 20%"
-              class="q-mr-md text-white"
+              style="width: 30%"
+              class="q-mr-md teal-10"
               debounce="600"
-              color="secondary"
+              color="teal-10"
+              dark
+              filled
+              square
+              label-color="primary"
               v-model="filter"
               v-on:keyup.enter="(ev) => filterCompany(ev)"
             >
@@ -77,7 +81,15 @@
   </div>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped>
+.container {
+  width: 100vw;
+  height: 100vh;
+}
+
+.q-table {
+}
+</style>
 
 <script>
 import { defineComponent, ref } from "vue";
