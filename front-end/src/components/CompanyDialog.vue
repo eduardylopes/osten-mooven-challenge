@@ -116,15 +116,15 @@
                   dense
                   v-model="company.address.number"
                   label="Número"
-                  type="number"
                   color="secondary"
-                  mask="number"
                   clearable
                   lazy-rules
                   :rules="[
                     (val) =>
-                      (val && val.length > 0) ||
-                      'O campo número deve ser preenchido',
+                      (val && val > 0) || 'O campo número deve ser preenchido',
+                    (val) =>
+                      (val && !isNaN(val)) ||
+                      'O campo deve conter apenas números',
                   ]"
                 />
 
@@ -292,10 +292,10 @@ export default defineComponent({
         "corporate_nameRef",
         "cnpjRef",
         "streetRef",
-        "numberRef",
         "districtRef",
         "cityRef",
         "stateRef",
+        "numberRef",
         "telephoneRef",
       ];
 
