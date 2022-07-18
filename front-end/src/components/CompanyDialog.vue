@@ -345,6 +345,65 @@ export default defineComponent({
       }
     },
 
+    async onUpdateCompany() {
+      const refs = [
+        "fantasy_nameRef",
+        "corporate_nameRef",
+        "cnpjRef",
+        "streetRef",
+        "districtRef",
+        "cityRef",
+        "stateRef",
+        "numberRef",
+        "telephoneRef",
+      ];
+
+      refs.forEach((ref) => {
+        this.$refs[ref].validate();
+      });
+
+      const hasError = refs.reduce((acc, ref) => {
+        return (acc |= this.$refs[ref].hasError);
+      }, false);
+
+      if (hasError) {
+        this.$q.notify({
+          message: "É necessário preencher os campos obrigatórios",
+          color: "negative",
+          position: "top",
+          timeout: 3000,
+        });
+
+        return;
+      }
+
+      this.company.address.number = Number(this.company.address.number);
+      const response = await updateCompany(this.companyId, this.company);
+
+      if (response.status === 200) {
+        this.$q.notify({
+          message: "Empresa atualizada com sucesso!.",
+          color: "positive",
+          position: "top",
+          timeout: 1500,
+        });
+
+        this.onCloseDialog();
+        return;
+      }
+
+      if (response.data.message === "company already exists") {
+        this.$q.notify({
+          message: "Empresa já cadastrada",
+          color: "negative",
+          position: "top",
+          timeout: 3000,
+        });
+
+        return;
+      }
+    },
+
     confirmCancel() {
       this.$q
         .dialog({
@@ -388,27 +447,6 @@ export default defineComponent({
     async loadCompany(companyId) {
       const { data } = await getCompany(companyId);
       this.company = this.updateCompanyMapper(data);
-    },
-
-    async onUpdateCompany() {
-      const response = await updateCompany(this.companyId, {
-        ...this.company,
-        address: {
-          ...this.company.address,
-          number: Number(this.company.address.number),
-        },
-      });
-
-      if (response) {
-        this.$q.notify({
-          message: "Dados atualizados com sucesso!.",
-          color: "positive",
-          position: "top",
-          timeout: 1500,
-        });
-
-        this.onCloseDialog();
-      }
     },
 
     updateCompanyMapper({ corporate_name, fantasy_name, cnpj, address }) {
