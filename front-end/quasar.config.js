@@ -19,6 +19,8 @@ module.exports = configure(function () {
         node: "node16",
       },
 
+      distDir: ctx.mode.spa ? "public" : null,
+
       env: {
         API: "http://localhost:3000/api",
       },
