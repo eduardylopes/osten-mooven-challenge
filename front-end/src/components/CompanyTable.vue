@@ -25,16 +25,32 @@
 
         <q-td key="action" :props="props">
           <q-btn
+            outline
+            dense
+            @click="onShowDetail(props.row.id)"
+            class="q-mr-sm"
+            color="yellow-14"
+            name="action"
+            icon="visibility"
+          >
+            <q-tooltip>Visualizar</q-tooltip>
+          </q-btn>
+          <q-btn
+            outline
+            dense
             @click="onEditCompany(props.row.id)"
-            class="q-mr-sm bg-secondary"
+            color="light-blue-10"
+            class="q-mr-sm"
             name="action"
             icon="edit"
           >
             <q-tooltip>Editar</q-tooltip>
           </q-btn>
           <q-btn
+            outline
+            dense
             @click="confirmDeleteCompany(props.row.id)"
-            class="bg-red"
+            color="red-6"
             name="action"
             icon="delete"
           >
@@ -45,14 +61,13 @@
     </template>
 
     <template v-slot:top>
-      <div class="row full-width justify-between q-mb-md flex flex-row">
+      <div class="row full-width justify-between q-mb-md flex flex-row header">
         <q-input
           class="q-mr-md teal-10"
           debounce="600"
           color="teal-10"
           dark
           filled
-          square
           label-color="primary"
           v-model="filter"
           v-on:keyup.enter="(ev) => filterCompany(ev)"
@@ -76,16 +91,39 @@
     :companyId="companyId"
     :isEdit="isEdit"
   />
+  <CompanyDetail
+    v-model="activeCompanyDetail"
+    @closeInput="closeCompanyDetail"
+    :companyId="companyId"
+    :value="activeCompanyDetail"
+  />
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .container {
   width: 100vw;
-  height: 100vw;
+  height: 100vh;
 }
 .q-input {
   flex: 1;
   max-width: 500px;
+}
+
+@media screen and (max-width: 720px) {
+  .container {
+    .header {
+      flex-direction: column-reverse;
+
+      .q-input {
+        max-width: initial;
+        margin: 10px 0;
+      }
+
+      .q-btn {
+        padding: 15px;
+      }
+    }
+  }
 }
 </style>
 
@@ -97,6 +135,7 @@ import {
   getFilterCompanies,
 } from "./CompanyService";
 import CompanyDialog from "./CompanyDialog.vue";
+import CompanyDetail from "./CompanyDetail.vue";
 
 const columns = [
   {
@@ -127,14 +166,14 @@ const columns = [
   {
     name: "action",
     align: "center",
-    label: "Action",
+    label: "Actions",
   },
 ];
 
 export default defineComponent({
   name: "CompanyItem",
 
-  components: { CompanyDialog },
+  components: { CompanyDialog, CompanyDetail },
 
   setup() {
     const leftDrawerOpen = ref(false);
@@ -145,6 +184,7 @@ export default defineComponent({
       isEdit: ref(false),
       companyId: ref(null),
       activeCompanyDialog: ref(false),
+      activeCompanyDetail: ref(false),
       columns,
       companies,
       filter,
@@ -161,6 +201,16 @@ export default defineComponent({
     onShowDialog() {
       this.activeCompanyDialog = true;
       this.isEdit = false;
+      this.companyId = null;
+    },
+
+    onShowDetail(companyId) {
+      this.activeCompanyDetail = true;
+      this.companyId = companyId;
+    },
+
+    onCloseDetail() {
+      this.activeCompanyDetail = false;
       this.companyId = null;
     },
 
@@ -209,7 +259,6 @@ export default defineComponent({
     },
 
     onEditCompany(companyId) {
-      console.log(companyId);
       this.isEdit = true;
       this.activeCompanyDialog = true;
       this.companyId = companyId;

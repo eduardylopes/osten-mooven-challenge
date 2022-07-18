@@ -7,7 +7,20 @@
     :dark="true"
   >
     <q-card class="q-pa-lg bg-dark">
-      <div class="text-h6 text-white">Preencha o formulário abaixo</div>
+      <q-toolbar>
+        <q-toolbar-title class="text-white"
+          >Preencha o formulário</q-toolbar-title
+        >
+        <q-btn
+          @click="confirmCancel()"
+          flat
+          round
+          dense
+          class="text-white"
+          icon="close"
+        />
+      </q-toolbar>
+
       <p>
         <q-card-separator>
           <form class="company-form">
@@ -22,6 +35,7 @@
                   :dark="true"
                   class="full-width"
                   outlined
+                  dense
                   v-model="company.name"
                   label="Nome"
                   color="secondary"
@@ -36,7 +50,8 @@
                 <q-input
                   ref="corporate_nameRef"
                   :dark="true"
-                  class="full-width q-mt-md"
+                  class="full-width q-mt-sm"
+                  dense
                   outlined
                   v-model="company.corporate_name"
                   label="Razão social"
@@ -52,7 +67,8 @@
                 <q-input
                   ref="cnpjRef"
                   :dark="true"
-                  class="full-width q-mt-md"
+                  class="full-width q-mt-sm"
+                  dense
                   outlined
                   v-model="company.cnpj"
                   label="CNPJ"
@@ -78,6 +94,7 @@
                   :dark="true"
                   class="col-8 q-pr-sm"
                   outlined
+                  dense
                   v-model="company.address.street"
                   label="Rua"
                   type="address"
@@ -96,6 +113,7 @@
                   :dark="true"
                   class="col-4"
                   outlined
+                  dense
                   v-model="company.address.number"
                   label="Número"
                   type="number"
@@ -112,8 +130,9 @@
 
                 <q-input
                   :dark="true"
-                  class="col-6 q-pr-sm q-mt-md"
+                  class="col-6 q-pr-sm q-mt-sm"
                   outlined
+                  dense
                   v-model="company.address.complement"
                   label="Complemento"
                   type="address"
@@ -124,8 +143,9 @@
                 <q-input
                   ref="districtRef"
                   :dark="true"
-                  class="col-6 q-mt-md"
+                  class="col-6 q-mt-sm"
                   outlined
+                  dense
                   v-model="company.address.district"
                   label="Bairro"
                   type="address"
@@ -142,8 +162,9 @@
                 <q-input
                   ref="cityRef"
                   :dark="true"
-                  class="col-6 q-pr-sm q-mt-md"
+                  class="col-6 q-pr-sm q-mt-sm"
                   outlined
+                  dense
                   v-model="company.address.city"
                   label="Cidade"
                   type="address"
@@ -160,8 +181,9 @@
                 <q-input
                   ref="stateRef"
                   :dark="true"
-                  class="col-6 q-mt-md"
+                  class="col-6 q-mt-sm"
                   outlined
+                  dense
                   v-model="company.address.state"
                   label="Estado"
                   type="address"
@@ -178,8 +200,9 @@
                 <q-input
                   ref="telephoneRef"
                   :dark="true"
-                  class="col-4 q-mt-md"
+                  class="col-4 q-mt-sm"
                   outlined
+                  dense
                   v-model="company.address.telephone"
                   label="Telefone"
                   color="secondary"
@@ -419,7 +442,6 @@ export default defineComponent({
 
   watch: {
     isEdit(val) {
-      console.log(val);
       if (val) {
         this.loadCompany(this.companyId);
       }
