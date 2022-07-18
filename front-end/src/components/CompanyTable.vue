@@ -110,18 +110,16 @@
 }
 
 @media screen and (max-width: 720px) {
-  .container {
-    .header {
-      flex-direction: column-reverse;
+  .header {
+    flex-direction: column-reverse;
 
-      .q-input {
-        max-width: initial;
-        margin: 10px 0;
-      }
+    .q-input {
+      max-width: initial;
+      margin: 10px 0;
+    }
 
-      .q-btn {
-        padding: 15px;
-      }
+    .q-btn {
+      padding: 15px;
     }
   }
 }

@@ -2,7 +2,7 @@
 CREATE TABLE "Company" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "corporate_name" TEXT NOT NULL,
-    "name" TEXT NOT NULL,
+    "fantasy_name" TEXT,
     "cnpj" TEXT NOT NULL,
     "created_at" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 );

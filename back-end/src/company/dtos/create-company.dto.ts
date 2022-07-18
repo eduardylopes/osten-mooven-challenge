@@ -46,7 +46,7 @@ export class CreateCompanyDto {
 
   @ApiProperty()
   @IsString()
-  name: string;
+  fantasy_name: string;
 
   @ApiProperty()
   @Matches(/^\d{2}\.?\d{3}\.?\d{3}\/?\d{4}\-?\d{2}$/, {

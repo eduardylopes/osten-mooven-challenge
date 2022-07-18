@@ -24,6 +24,14 @@
           </q-item>
           <q-item v-ripple>
             <q-item-section>
+              <q-item-label class="text-secondary" color="secondary" overline
+                >Nome Fantasia</q-item-label
+              >
+              <q-item-label>{{ company.fantasy_name }}</q-item-label>
+            </q-item-section>
+          </q-item>
+          <q-item v-ripple>
+            <q-item-section>
               <q-item-label class="text-secondary" overline
                 >Razão Social</q-item-label
               >
@@ -56,7 +64,7 @@
               </q-item-section>
             </q-item>
 
-            <q-item v-ripple>
+            <q-item v-ripple v-if="company.address.complement">
               <q-item-section>
                 <q-item-label class="text-secondary" overline
                   >Complemento</q-item-label

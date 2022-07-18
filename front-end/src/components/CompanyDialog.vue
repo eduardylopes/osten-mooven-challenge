@@ -31,13 +31,13 @@
             <div class="form-group q-mt-lg">
               <div class="row col-12">
                 <q-input
-                  ref="nameRef"
+                  ref="fantasy_nameRef"
                   :dark="true"
                   class="full-width"
                   outlined
                   dense
-                  v-model="company.name"
-                  label="Nome"
+                  v-model="company.fantasy_name"
+                  label="Nome Fantasia"
                   color="secondary"
                   lazy-rules
                   :rules="[
@@ -255,7 +255,7 @@ export default defineComponent({
     return {
       company: ref({
         corporate_name: null,
-        name: null,
+        fantasy_name: null,
         cnpj: null,
         address: {
           street: null,
@@ -288,7 +288,7 @@ export default defineComponent({
   methods: {
     async onCreateCompany() {
       const refs = [
-        "nameRef",
+        "fantasy_nameRef",
         "corporate_nameRef",
         "cnpjRef",
         "streetRef",
@@ -371,7 +371,7 @@ export default defineComponent({
     clearFields() {
       this.company = {
         corporate_name: null,
-        name: null,
+        fantasy_name: null,
         cnpj: null,
         address: {
           street: null,
@@ -411,13 +411,13 @@ export default defineComponent({
       }
     },
 
-    updateCompanyMapper({ corporate_name, name, cnpj, address }) {
+    updateCompanyMapper({ corporate_name, fantasy_name, cnpj, address }) {
       const { street, number, complement, district, city, state, telephone } =
         address;
 
       const company = {
         corporate_name,
-        name,
+        fantasy_name,
         cnpj,
         address: {
           street,

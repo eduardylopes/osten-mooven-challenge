@@ -11,7 +11,7 @@ export class CompanyService {
 
   async create({
     corporate_name,
-    name,
+    fantasy_name,
     cnpj,
     address,
   }: CreateCompanyDto): Promise<Company> {
@@ -32,7 +32,7 @@ export class CompanyService {
     const newCompany = await this.prisma.company.create({
       data: {
         corporate_name,
-        name,
+        fantasy_name,
         cnpj,
         address: {
           create: address,
@@ -105,7 +105,7 @@ export class CompanyService {
   }
 
   async update(
-    { name, corporate_name, cnpj, address }: UpdateCompanyDto,
+    { fantasy_name, corporate_name, cnpj, address }: UpdateCompanyDto,
     id: number,
   ) {
     if (cnpj) {
@@ -128,7 +128,7 @@ export class CompanyService {
     await this.prisma.company.update({
       where: { id },
       data: {
-        name,
+        fantasy_name,
         corporate_name,
         cnpj,
         address: { update: address },

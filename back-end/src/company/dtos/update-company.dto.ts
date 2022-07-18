@@ -54,7 +54,7 @@ export class UpdateCompanyDto {
   @ApiProperty()
   @IsOptional()
   @IsString()
-  name?: string;
+  fantasy_name?: string;
 
   @ApiProperty()
   @IsOptional()
