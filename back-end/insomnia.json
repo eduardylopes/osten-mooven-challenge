@@ -1,0 +1,228 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2022-07-18T02:44:04.876Z",
+  "__export_source": "insomnia.desktop.app:v2022.4.2",
+  "resources": [
+    {
+      "_id": "req_f0385f895454489c9d8be310983ee6f0",
+      "parentId": "wrk_c3a4a97c173c4733964355d3e1243d9c",
+      "modified": 1658068275534,
+      "created": 1657931192790,
+      "url": "{{ _.baseUrl }}/company/filter",
+      "name": "List By Includes",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [
+        {
+          "id": "pair_962a875b24274e1baecac583a592f971",
+          "name": "corporate_name",
+          "value": "qyon",
+          "description": ""
+        }
+      ],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1657931192790,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "wrk_c3a4a97c173c4733964355d3e1243d9c",
+      "parentId": null,
+      "modified": 1657927866120,
+      "created": 1657927866120,
+      "name": "osten-moove-challenge",
+      "description": "",
+      "scope": "collection",
+      "_type": "workspace"
+    },
+    {
+      "_id": "req_7370eb6098c44865adcbc596f81e77df",
+      "parentId": "wrk_c3a4a97c173c4733964355d3e1243d9c",
+      "modified": 1658068238692,
+      "created": 1657931017309,
+      "url": "{{ _.baseUrl }}/company/",
+      "name": "List By ID",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1657931017309,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_4bb0230bbe1448eb8be00e166d84f046",
+      "parentId": "wrk_c3a4a97c173c4733964355d3e1243d9c",
+      "modified": 1658067945455,
+      "created": 1657927869688,
+      "url": "{{ _.baseUrl }}/company/",
+      "name": "List All Companies",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [
+        {
+          "id": "pair_68c0454f1b284f209d4016e035e894cc",
+          "name": "page",
+          "value": "1",
+          "description": "",
+          "disabled": false
+        },
+        {
+          "id": "pair_1d913add7ac74fb6917bbd21f828f376",
+          "name": "limit",
+          "value": "2",
+          "description": "",
+          "disabled": false
+        }
+      ],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1657930841913.5,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_22f96f40835842b8930d9e6849c59645",
+      "parentId": "wrk_c3a4a97c173c4733964355d3e1243d9c",
+      "modified": 1658081503861,
+      "created": 1657927922814,
+      "url": "{{ _.baseUrl }}/company",
+      "name": "Create Company",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"corporate_name\": \"QYON\",\n\t\"name\": \"BBBBB\",\n  \"cnpj\": \"51.920.021/0001-66\",\n\t\"address\": {\n\t\t\"street\": \"AVENIDA MARGINAL TESTE\",\n\t\t\"number\": 1001,\n\t\t\"complement\": \"Company\",\n\t\t\"district\": \"Polo Industrial\",\n\t\t\"city\": \"Santa Bárbara d'Oeste\",\n\t\t\"state\": \"São Paulo\",\n\t\t\"telephone\": \"(19) 3026-1801\"\n\t}\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_ce85bc8bd4cb4d40af0799f898ec157a"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1657930754215.75,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_16cdddca6ecf484c98a4a30b014620f1",
+      "parentId": "wrk_c3a4a97c173c4733964355d3e1243d9c",
+      "modified": 1658067058950,
+      "created": 1657930666518,
+      "url": "{{ _.baseUrl }}/company/0",
+      "name": "Delete Company",
+      "description": "",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1657930666518,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_f643fe2af42a4f61bb6bd54c501cb988",
+      "parentId": "wrk_c3a4a97c173c4733964355d3e1243d9c",
+      "modified": 1658067604511,
+      "created": 1657945543008,
+      "url": "{{ _.baseUrl }}/company/970585eb-4421-4842-9a8d-b1704c08c64b",
+      "name": "Update Company",
+      "description": "",
+      "method": "PATCH",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"name\": \"IIIIIIIIIIIIIIIIIIII\",\n\t\"address\": { \"street\": \"AAAAAAAAAAAAAAAAA\" }\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_4c7c3b9bd136400ea08f75f51c62d07f"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1657927922764,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "env_ccdbfe9f97d05d996473c2bc5ca651b7ee9b5965",
+      "parentId": "wrk_c3a4a97c173c4733964355d3e1243d9c",
+      "modified": 1658066610301,
+      "created": 1657927866123,
+      "name": "Base Environment",
+      "data": { "baseUrl": "http://localhost:3000/api" },
+      "dataPropertyOrder": { "&": ["baseUrl"] },
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1657927866123,
+      "_type": "environment"
+    },
+    {
+      "_id": "jar_ccdbfe9f97d05d996473c2bc5ca651b7ee9b5965",
+      "parentId": "wrk_c3a4a97c173c4733964355d3e1243d9c",
+      "modified": 1657927866124,
+      "created": 1657927866124,
+      "name": "Default Jar",
+      "cookies": [],
+      "_type": "cookie_jar"
+    },
+    {
+      "_id": "spc_74feb2be7e464682bb72d374a09458bc",
+      "parentId": "wrk_c3a4a97c173c4733964355d3e1243d9c",
+      "modified": 1657927866121,
+      "created": 1657927866121,
+      "fileName": "osten-moove-challenge",
+      "contents": "",
+      "contentType": "yaml",
+      "_type": "api_spec"
+    }
+  ]
+}
