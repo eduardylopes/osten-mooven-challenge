@@ -6,7 +6,7 @@
 $ npm install
 ```
 
-### SQLite Database: No server is required to use a SQLite database, so you can just add an environment variable point it to a local file which in this case is called dev.db
+### SQLite Database: No server is required to use a SQLite database, so you can just add an environment variable and point it to a local file which in this case is called dev.db
 
 ### Configure environment variables at .env file.
 
