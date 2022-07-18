@@ -15,7 +15,7 @@
           {{ props.row.id }}
         </q-td>
 
-        <q-td key="corporate_name" :props="props">
+        <q-td key="corporate_name" :props="props" style="min-width: 400px">
           {{ props.row.corporate_name }}
         </q-td>
 
