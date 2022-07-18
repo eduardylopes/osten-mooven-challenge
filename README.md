@@ -36,6 +36,17 @@ $ npm i -g @quasar/cli
 $ npm install
 ```
 
+### Configure the API access url in quasar.config.js file
+
+```bash
+build: {
+
+  env: {
+    API: "http://localhost:3000/api",
+  }
+}
+```
+
 ### Start the app in development mode (hot-code reloading, error reporting, etc.)
 
 ```bash
